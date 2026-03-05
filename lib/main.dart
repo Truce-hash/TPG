@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Student Info App',
+      //Universal Theme for the entire app
       theme: ThemeData(
         primarySwatch: Colors.green,
         appBarTheme: const AppBarTheme(
@@ -48,45 +49,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-/*class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return  Scaffold(
-      appBar: AppBar(
-        title: Text('My Student'),
-        backgroundColor: Colors.blue,
-        centerTitle: true,
-
-        actions: [
-          IconButton(icon: const Icon(Icons.settings),
-          onPressed: (){
-            print("Settings Pressed");
-          },)
-          
-        ]
-      ),
-
-      body: const Center(
-        child: Text('Welcome to my fisrt app!'),
-      ),
-
-      floatingActionButton: FloatingActionButton(onPressed:(){
-        print('FEB pressed');
-      },
-      child: const Icon(Icons.add),),
-
-      bottomNavigationBar: BottomNavigationBar(
-        items: const[
-       BottomNavigationBarItem(icon: Icon(Icons.home),
-       label: 'Profile',
-       )
-      ]),
-    );
-  }
-}*/
-
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
@@ -95,13 +57,22 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  //RAAW data
   String studentName = "Truce";
   String favouriteSubject = "TPG316C";
   int subjectIndex = 0;
-  List<String> subjects = ["TPG316C", "SOD316C", "CMN316c", "ITS316C"];
+  //List<String> subjects = ["TPG316C", "SOD316C", "CMN316c", "ITS316C"];
+
+  //Function to change the favourite subject
+  void changeSubject() {
+    setState(() {
+      favouriteSubject = "SOD316C";
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    //UI
     return Scaffold(
       appBar: AppBar(
         title: const Text('My Student Card'),
@@ -110,13 +81,14 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(
             icon: Icon(Icons.settings),
             onPressed: () {
-              print('Settings pressed');
+              // print('Settings pressed');
             },
           ),
         ],
       ),
 
       body: Center(
+        //Scrollable for when there's no space for content
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
@@ -142,12 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        subjectIndex = (subjectIndex + 1) % subjects.length;
-                        favouriteSubject = subjects[subjectIndex];
-                      });
-                    },
+                    onPressed: () => changeSubject(), //calls changeSubject
                     child: const Text('Change Favourite Subject'),
                   ),
                 ),
@@ -170,6 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
 class StudentInfoCard extends StatelessWidget {
   const StudentInfoCard({
     super.key,
+    //Variables that will sotr the RAAAW data
     required this.studentName,
     required this.favouriteSubject,
   });
