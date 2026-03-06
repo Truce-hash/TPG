@@ -30,7 +30,9 @@ class StudentView extends StatelessWidget {
             _buildSubjectList(),
             //Plus /Minus buttons
             const SizedBox(height: 20),
-            _buildGradeButtons(),
+            _buildPlusGradeButtons(),
+            const SizedBox(height: 10),
+            _buildMinusGradeButtons(),
           ],
         ),
       ),
@@ -144,22 +146,29 @@ Widget _buildSubjectList() {
   );
 }
 
-Widget _buildGradeButtons() {
+Widget _buildPlusGradeButtons() {
   return Consumer<StudentViewModel>(
     builder: (context, viewModel, child) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ElevatedButton(
-            onPressed: () => viewModel.decreaseGrade(),
-            child: const Text("-"),
-          ),
-          const SizedBox(width: 20),
-          ElevatedButton(
-            onPressed: () => viewModel.increaseGrade(),
-            child: const Text("+"),
-          ),
-        ],
+      return SizedBox(
+        width: double.infinity,
+        child: ElevatedButton(
+          onPressed: () => viewModel.decreaseGrade(),
+          child: const Text("-"),
+        ),
+      );
+    },
+  );
+}
+
+Widget _buildMinusGradeButtons() {
+  return Consumer<StudentViewModel>(
+    builder: (context, viewModel, child) {
+      return SizedBox(
+        width: double.infinity,
+        child: ElevatedButton(
+          onPressed: () => viewModel.increaseGrade(),
+          child: const Text("+"),
+        ),
       );
     },
   );
